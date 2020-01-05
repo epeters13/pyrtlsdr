@@ -694,3 +694,44 @@ class RtlSdr(BaseRtlSdr):
                           % (result))
 
         self.read_async_canceling = True
+
+    def set_bias_tee(self,on):
+        """
+        Enable the Bias Tee on GPIO PIN 0
+
+        Read the instructions on https://www.rtl-sdr.com/rtl-sdr-blog-v-3-dongles-user-guide/ before attemting enabling the bias tee
+
+        Arguments:
+            on (int): 0 disable, 1 enable
+
+        Returns:
+            -1 if device not initialized. 0 otherwise
+        """
+
+        result = librtlsdr.rtlsdr_set_bias_tee(self.dev_p,on)
+
+        if result < 0:
+            self.close()
+            raise IOError('Error code %d when setting Bias Tee' % (result))
+        
+        
+    def set_gpio(self,on,gpio):
+        """
+        Generic GPIO Enable
+        
+        Arguments:
+            on (int): 0 or 1 to set GPIO state
+            gpio (int): gpio port number
+
+        Returns:
+            -1 if device not initialized. 0 otherwise
+        """
+
+        result = librtlsdr.rtlsdr_set_gpio(self.dev_p,on,gpio)
+
+        if result < 0:
+            self.close()
+            raise IOError('Error code %d when setting GPIO' % (result))
+
+        
+        

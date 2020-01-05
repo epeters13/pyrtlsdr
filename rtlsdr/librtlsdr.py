@@ -182,6 +182,14 @@ f.restype, f.argtypes = c_int, [p_rtlsdr_dev, rtlsdr_read_async_cb_t, py_object,
 f = librtlsdr.rtlsdr_cancel_async
 f.restype, f.argtypes = c_int, [p_rtlsdr_dev]
 
+# RTLSDR_API int rtlsdr_set_bias_tee(rtlsdr_dev_t *dev, int on, int on);
+f = librtlsdr.rtlsdr_set_bias_tee
+f.restype, f.argtypes = c_int, [p_rtlsdr_dev, c_int]
+
+# RTLSDR_API int rtlsdr_set_gpio(rtlsdr_dev_t *dev, int on, int gpio); 
+f = librtlsdr.rtlsdr_set_gpio
+f.restype, f.argtypes = c_int, [p_rtlsdr_dev, c_int, c_int]
+
 # RTLSDR_API int rtlsdr_set_xtal_freq(rtlsdr_dev_t *dev, uint32_t rtl_freq,
 #				    uint32_t tuner_freq);
 f = librtlsdr.rtlsdr_set_xtal_freq
